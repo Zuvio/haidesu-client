@@ -1,0 +1,26 @@
+
+<!--An example of a template-driven form for the login screen with form validation. -->
+
+<div class="flex m-auto h-screen justify-center">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="p-4 m-auto">
+    <div class="p-1">
+      <input [(ngModel)]="email" #emailInput="ngModel" required email
+             type="email" id="email" placeholder="Email" name="email" class="p-1 border {{ emailInput.invalid && emailInput.touched ? 'border-red-500' : 'border' }} w-full" >
+          <div class="text-red-500 text-xs italic" *ngIf="emailInput.invalid && emailInput.touched">
+            <div *ngIf="emailInput.errors?.['required']">Email is required.</div>
+            <div *ngIf="emailInput.errors?.['email']">Email is invalid.</div>
+          </div>
+    </div>
+    <div class="p-1">
+      <input [(ngModel)]="password" #passwordInput="ngModel" required minlength="6"
+             type="password" id="password" placeholder="Password" name="password" class="p-1 border {{ passwordInput.invalid && passwordInput.touched ? 'border-red-500' : 'border' }} w-full" >
+          <div class="text-red-500 text-xs italic" *ngIf="passwordInput.invalid && passwordInput.touched">
+            <div *ngIf="passwordInput.errors?.['required']">Password is required</div>
+            <div *ngIf="passwordInput.errors?.['minlength']">Password requires at least 6 characters.</div>
+          </div>
+    </div>
+    <div class="p-1">
+      <input type="submit" value="Login" class="p-2 w-full bg-purple-700 text-white hover:bg-purple-400">
+    </div>
+  </form>
+</div>

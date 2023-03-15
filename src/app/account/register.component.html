@@ -1,0 +1,38 @@
+
+<!--An example of a reactive form for the login screen with form validation. -->
+
+<div class="flex m-auto h-screen justify-center">
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="p-4 m-auto">
+    <div class="p-1">
+      <input formControlName="username" type="text" id="username" placeholder="Username" name="username" class="p-1 border w-full">
+      <div *ngIf="registrationForm.controls['username'].errors" class="text-red-500 text-xs italic">
+        <div *ngIf="registrationForm.controls['username'].touched && registrationForm.controls['username'].errors['required']">Username is required</div>
+        <div *ngIf="registrationForm.controls['username'].touched && registrationForm.controls['username'].errors['minlength']">Username requires at least 3 characters.</div>
+      </div>
+    </div>
+    <div class="p-1">
+      <input formControlName="email" type="email" id="email" placeholder="Email" name="email" class="p-1 border w-full">
+      <div *ngIf="registrationForm.controls['email'].errors" class="text-red-500 text-xs italic">
+        <div *ngIf="registrationForm.controls['email'].touched && registrationForm.controls['email'].errors['required']">Email is required</div>
+        <div *ngIf="registrationForm.controls['email'].touched && registrationForm.controls['email'].errors['email']">Email is not valid.</div>
+      </div>
+    </div>
+    <div class="p-1">
+      <input formControlName="password" type="password" id="password" placeholder="Password" name="password" class="p-1 border w-full">
+      <div *ngIf="registrationForm.controls['password'].errors" class="text-red-500 text-xs italic">
+        <div *ngIf="registrationForm.controls['password'].touched && registrationForm.controls['password'].errors['required']">Password is required</div>
+        <div *ngIf="registrationForm.controls['password'].touched && registrationForm.controls['password'].errors['minlength']">Password requires at least 6 characters.</div>
+      </div>
+    </div>
+    <div class="p-1">
+      <input formControlName="confirmPassword" type="password" id="confirmPassword" placeholder="Confirm Password" name="confirmPassword" class="p-1 border w-full">
+      <div *ngIf="registrationForm.controls['confirmPassword'].errors" class="text-red-500 text-xs italic">
+        <div *ngIf="registrationForm.controls['confirmPassword'].touched && registrationForm.controls['confirmPassword'].errors['required']">Confirm password is required</div>
+        <div *ngIf="registrationForm.controls['confirmPassword'].touched && registrationForm.controls['confirmPassword'].errors['confirmedValidator']">Passwords must match.</div>
+      </div>
+    </div>
+    <div class="p-1">
+      <input [disabled]="!registrationForm.valid" type="submit" value="Register" class="p-2 w-full bg-purple-700 hover:bg-purple-400 text-white">
+    </div>
+  </form>
+</div>

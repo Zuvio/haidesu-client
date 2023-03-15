@@ -1,0 +1,231 @@
+openapi: 3.0.3
+info:
+  title: HaiDesu - Image Management API
+  description: The HaiDesu REST API for managing images
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/
+tags:
+  - name: image
+    description: Everything about your images
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: user
+    description: Operations about user
+paths:
+  /users:
+    get:
+      tags:
+        - user
+      summary: Retrieve all users
+      operationId: getAllUsers
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        200:
+          description: Successfully retrieved all users
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Found account objects
+                items:
+                  $ref: '#/components/schemas/User'
+        default:
+          $ref: '#/components/responses/Error'
+    post:
+      tags:
+        - user
+      summary: Add a new user
+      operationId: addNewUser
+      requestBody:
+        required: true
+        description: The user that has to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUser'
+      responses:
+        201:
+          description: user.ts added succesfully!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/InvalidInput'
+        500:
+          $ref: '#/components/responses/Error'
+  /users/{userId}:
+    get:
+      tags:
+        - user
+      summary: Retrieve a user by Id
+      operationId: getUserById
+      parameters:
+        - $ref: '#/components/parameters/userId'
+      responses:
+        200:
+          description: A user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Error'
+    patch:
+      tags:
+        - user
+      summary: Update the user info
+      operationId: updateUser
+      parameters:
+        - $ref: '#/components/parameters/userId'
+      requestBody:
+        description: Fields to be updated
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUser'
+        required: true
+      responses:
+        204:
+          description: Updated
+          content: { }
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Error'
+    delete:
+      tags:
+        - user
+      summary: Delete a user
+      operationId: deleteUserById
+      parameters:
+        - $ref: '#/components/parameters/userId'
+      responses:
+        204:
+          description: Deleted
+          content: { }
+        404:
+          $ref: '#/components/responses/NotFound'
+        default:
+          $ref: '#/components/responses/Error'
+components:
+  schemas:
+    Error:
+      required:
+        - code
+        - message
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    User:
+      required:
+        - id
+        - username
+        - password
+        - email
+      allOf:
+        - $ref: '#/components/schemas/UserId'
+        - $ref: '#/components/schemas/UserProperties'
+        - $ref: '#/components/schemas/UserLastLogin'
+    UserId:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    UserProperties:
+      required:
+        - username
+        - password
+        - email
+      type: object
+      properties:
+        username:
+          type: string
+          description: Name of the customer
+          example: John
+        password:
+          type: string
+          format: password
+          description: Name of the customer
+          example: 1mP0rt3nt
+        email:
+          type: string
+          description: Email
+          example: chibi@haidesu.com
+    UserLastLogin:
+      type: object
+      properties:
+        lastLogin:
+          type: string
+          format: date-time
+          description: Last login
+          example: 2017-07-21T17:32:28Z
+    CreateUser:
+      allOf:
+        - $ref: '#/components/schemas/UserProperties'
+    UpdateUser:
+      type: object
+      properties:
+        password:
+          nullable: true
+          type: string
+        email:
+          nullable: true
+          type: string
+  responses:
+    Error:
+      description: Error accessing the service consistent with http status code
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InvalidInput:
+      description: Invalid input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Unable to find resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    userId:
+      name: userId
+      in: path
+      description: user.ts ID
+      required: true
+      schema:
+        type: integer
+        format: int64
+    page:
+      name: page
+      in: query
+      description: The number of the page you want to view (starts at 0)
+      schema:
+        type: integer
+        format: int32
+        default: 0
+    limit:
+      name: limit
+      in: query
+      description: The number of results in a single page
+      schema:
+        type: integer
+        format: int32
+        default: 100
