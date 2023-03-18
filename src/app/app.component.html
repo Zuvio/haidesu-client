@@ -1,10 +1,13 @@
-<nav class="haidesu-menu">
-  <div>
+<nav class="bg-purple-700">
+    <div class="flex space-x-4 p-4 text-white font-bold">
+      <a [routerLink]="'/home'">Home</a>
       <a [routerLink]="'/account/login'">Login</a>
       <a [routerLink]="'/account/register'">Registration</a>
-  </div>
+      <button *ngIf="alertService.alerts.length>0" (click)="alertService.clearAlerts()">Clear all alerts</button>
+    </div>
 </nav>
 
 <div class="haidesu-container">
+  <haidesu-alert></haidesu-alert>
   <router-outlet></router-outlet>
 </div>

@@ -8,20 +8,21 @@ import {LoginComponent} from './account/login.component';
 import {RegisterComponent} from './account/register.component';
 import {HomeComponent} from './home/home.component';
 import {HttpClientModule} from "@angular/common/http";
+import {AlertModule} from "./_alert/alert.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
-  ],
+    HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AlertModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,9 +8,9 @@ const routes: Routes = [
   {path: 'account/login', component: LoginComponent},
   {path: 'account/register', component: RegisterComponent},
   // if you make a path to AppComponent you load <router-outlet> twice
-  {path: '', component: HomeComponent},
+  {path: 'home', component: HomeComponent},
   // always redirect to account/login for now, change this when you have a landing page
-  {path: '**', redirectTo: ''}
+  {path: '**', redirectTo: '/home'}
 ];
 
 @NgModule({
