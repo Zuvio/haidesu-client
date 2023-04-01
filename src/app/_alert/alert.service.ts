@@ -1,11 +1,15 @@
 import {Injectable} from '@angular/core';
-import {Alert} from "../_models/alert";
+import {Alert, AlertType} from "./alert";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlertService {
   alerts: Alert[] = [];
+
+  success(message: string) {
+    this.addAlert(new Alert({type: AlertType.Success, message: message}))
+  }
 
   addAlert(alert: Alert) {
     this.alerts.push(alert);

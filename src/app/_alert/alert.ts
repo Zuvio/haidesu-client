@@ -1,7 +1,6 @@
 export class Alert {
-  type!: AlertType;
-  message!: string;
-  duration!: number;
+  type?: AlertType;
+  message?: string;
 
   constructor(data: Partial<Alert>) {
     Object.assign(this, data);

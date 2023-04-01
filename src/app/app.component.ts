@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {AlertService} from "./_services/alert.service";
 
 @Component({
   selector: 'haidesu-root',
@@ -8,7 +7,5 @@ import {AlertService} from "./_services/alert.service";
 })
 export class AppComponent  {
   title = 'haidesu-client';
-  constructor(public alertService: AlertService) {
-  }
 
 }

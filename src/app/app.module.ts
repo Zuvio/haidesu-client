@@ -9,6 +9,8 @@ import {RegisterComponent} from './account/register.component';
 import {HomeComponent} from './home/home.component';
 import {HttpClientModule} from "@angular/common/http";
 import {AlertModule} from "./_alert/alert.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import {AlertModule} from "./_alert/alert.module";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AlertModule
+    AlertModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
