@@ -7,8 +7,17 @@ import {Alert, AlertType} from "./alert";
 export class AlertService {
   alerts: Alert[] = [];
 
-  success(message: string) {
-    this.addAlert(new Alert({type: AlertType.Success, message: message}))
+  success(message: string, title: string) {
+    this.addAlert(new Alert({title: title, type: AlertType.Success, message: message}))
+  }
+  error(message: string, title: string) {
+    this.addAlert(new Alert({title: title, type: AlertType.Error, message: message}))
+  }
+  warning(message: string, title: string) {
+    this.addAlert(new Alert({title: title, type: AlertType.Warning, message: message}))
+  }
+  info(message: string, title: string) {
+    this.addAlert(new Alert({title: title, type: AlertType.Info, message: message}))
   }
 
   addAlert(alert: Alert) {

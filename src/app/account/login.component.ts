@@ -13,6 +13,7 @@ import {ToastrService} from "ngx-toastr";
 export class LoginComponent {
   email : string ='';
   password : string ='';
+  loading = false;
   constructor(private accountService: AccountService,
               private route: ActivatedRoute,
               private router: Router,
@@ -20,18 +21,22 @@ export class LoginComponent {
               private toastrService: ToastrService) { }
 
   onSubmit(loginForm : NgForm) {
+    this.loading=true;
     if(!loginForm.valid) {return;}
     this.accountService.login(this.email, this.password)
       .pipe(first())
       .subscribe({
         next: () => {
-          this.toastrService.success('You logged in with great power', 'Success')
-          this.alertService.success("You logged in succesfully!")
+          this.toastrService.success('You have been logged in', 'Success')
+          this.alertService.success("You have been logged in", 'Success')
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || ['/'];
           this.router.navigateByUrl(returnUrl);
         },
         error: error => {
-          console.log('ERROR TIME :' + error);
+          console.log(error)
+          this.toastrService.error(error.error.message, error.error.code, {timeOut: 5000});
+          this.alertService.error(error.error.message, error.error.code);
+          this.loading=false
         }
       })
   }

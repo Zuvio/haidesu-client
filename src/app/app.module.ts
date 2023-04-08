@@ -26,7 +26,7 @@ import {ToastrModule} from "ngx-toastr";
     HttpClientModule,
     AlertModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({positionClass: 'toast-top-center'})
   ],
   providers: [],
   bootstrap: [AppComponent]

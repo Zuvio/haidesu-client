@@ -1,4 +1,5 @@
 export class Alert {
+  title?: string;
   type?: AlertType;
   message?: string;
 

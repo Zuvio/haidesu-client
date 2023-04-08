@@ -6,6 +6,9 @@
       <a [routerLink]="'/account/register'">Registration</a>
       <a [routerLink]="'/alert'">Alerts</a>
     </div>
+    <div class="ml-auto p-4">
+      <button *ngIf="user" (click)="logout()">Logout</button>
+    </div>
   </div>
 </nav>
 
