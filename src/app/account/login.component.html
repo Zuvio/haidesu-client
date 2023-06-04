@@ -1,8 +1,8 @@
 
 <!--An example of a template-driven form for the login screen with form validation. -->
 
-<div class="flex m-auto h-screen justify-center">
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="p-4 m-auto w-96">
+<div class="h-[calc(100vh-74px)] flex flex-col justify-center items-center">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="p-4 w-96">
     <div class="p-1">
       <input [(ngModel)]="email" #emailInput="ngModel" required email
              type="email" id="email" placeholder="Email" name="email" class="p-1 border {{ emailInput.invalid && emailInput.touched ? 'border-red-500' : 'border' }} w-full" >

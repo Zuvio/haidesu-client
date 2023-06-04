@@ -1,12 +1,12 @@
 <nav class="bg-purple-700  text-white font-bold">
-  <div class="flex">
+  <div class="flex justify-center">
     <div class="space-x-4 p-4">
       <a [routerLink]="'/home'">Home</a>
       <a [routerLink]="'/account/login'">Login</a>
       <a [routerLink]="'/account/register'">Registration</a>
       <a [routerLink]="'/alert'">Alerts</a>
     </div>
-    <div class="ml-auto p-4">
+    <div class="p-4 ml-52">
       <button *ngIf="user" (click)="logout()">Logout</button>
     </div>
   </div>
